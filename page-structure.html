@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- VIOLATION html-has-lang: no lang attribute on <html> -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- VIOLATION meta-viewport (disables zoom) + meta-viewport-large (cannot scale to 500%) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- VIOLATION document-title: empty title -->
+  <title></title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    .box { border: 1px solid #ccc; padding: 12px; margin: 12px 0; }
+    .lbl { font: 600 15px monospace; color: #b3261e; margin: 0 0 4px; }
+    p.desc { color: #555; font-size: 13px; margin: 0 0 8px; }
+  </style>
+</head>
+<body>
+  <!-- A block of navigation links (external hrefs, so they do NOT count as an in-page bypass
+       mechanism) with no skip link / landmark / heading to escape them → bypass fails and is applicable. -->
+  <a href="https://example.com/home">Home</a>
+  <a href="https://example.com/products">Products</a>
+  <a href="https://example.com/services">Services</a>
+  <a href="https://example.com/about">About</a>
+  <a href="https://example.com/contact">Contact</a>
+
+  <!-- NOTE: intentionally NO headings, NO landmarks, and NO in-page (#) links.
+       axe's bypass rule passes if the page has ANY heading, landmark, or skip link,
+       so all three are omitted here to make bypass, page-has-heading-one, region,
+       and landmark-one-main all fire. skip-link is demonstrated on landmarks-frames-lang.html
+       (it would otherwise satisfy bypass and mask this page's failures). -->
+
+  <!-- VIOLATION bypass: no heading, no landmark, no skip link to bypass content -->
+  <!-- VIOLATION region: all content sits directly in <body>, outside any landmark -->
+  <!-- VIOLATION page-has-heading-one: no <h1> (and no headings at all) -->
+  <!-- VIOLATION landmark-one-main: no <main> landmark -->
+
+  <div class="box"><p class="lbl">html-has-lang</p><p class="desc">The &lt;html&gt; element has no lang attribute.</p></div>
+  <div class="box"><p class="lbl">document-title</p><p class="desc">The document &lt;title&gt; is empty.</p></div>
+  <div class="box"><p class="lbl">page-has-heading-one</p><p class="desc">This page has no level-one (or any) heading.</p></div>
+  <div class="box"><p class="lbl">landmark-one-main</p><p class="desc">This page has no &lt;main&gt; landmark.</p></div>
+  <div class="box"><p class="lbl">region</p><p class="desc">This content is not contained by any landmark.</p></div>
+  <div class="box"><p class="lbl">bypass</p><p class="desc">No mechanism (skip link, heading, or landmark) to bypass content.</p></div>
+  <div class="box"><p class="lbl">meta-viewport + meta-viewport-large</p><p class="desc">The viewport meta disables zoom / caps scaling.</p></div>
+
+  <div class="box"><p class="desc">Other pages (external links, not in-page anchors, so they do not satisfy bypass):
+    <a href="landmarks-frames-lang.html">landmarks-frames-lang.html</a> ·
+    <a href="lang-invalid.html">lang-invalid.html</a> ·
+    <a href="aria-hidden-body.html">aria-hidden-body.html</a></p></div>
+</body>
+</html>

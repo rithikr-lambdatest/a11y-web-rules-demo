@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- VIOLATION html-xml-lang-mismatch: lang and xml:lang disagree on the base language -->
+<html lang="en" xml:lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>a11y demo — duplicate landmarks, frames, invalid lang</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    header, footer, main, nav, aside { border: 1px dashed #999; padding: 8px; margin: 8px 0; }
+    h2 { font: 600 14px monospace; color: #b3261e; margin: 4px 0; }
+    p.desc { color: #555; font-size: 13px; margin: 0 0 6px; }
+  </style>
+</head>
+<body>
+  <!-- VIOLATION skip-link: the skip link points to an existing but NON-focusable target
+       (a missing target is treated as inapplicable, so the target must exist to be flagged) -->
+  <a href="#skip-dest">Skip to main content</a>
+  <span id="skip-dest">Content start (non-focusable target)</span>
+
+  <!-- VIOLATION landmark-no-duplicate-banner: two top-level banners -->
+  <header>
+    <h2>landmark-no-duplicate-banner (banner #1)</h2>
+  </header>
+  <header>
+    <h2>landmark-no-duplicate-banner (banner #2)</h2>
+  </header>
+
+  <!-- VIOLATION landmark-unique: two navs with the same role + accessible name -->
+  <nav aria-label="Primary"><h2>landmark-unique (nav "Primary" #1)</h2></nav>
+  <nav aria-label="Primary"><h2>landmark-unique (nav "Primary" #2)</h2></nav>
+
+  <main>
+    <h1>Duplicate / nested landmark violations</h1>
+
+    <!-- VIOLATION landmark-banner-is-top-level: banner nested inside main.
+         Uses role="banner" because a bare <header> inside <main> is NOT a banner landmark. -->
+    <div role="banner"><h2>landmark-banner-is-top-level (banner inside main)</h2></div>
+
+    <!-- VIOLATION landmark-no-duplicate-main + landmark-main-is-top-level: a second, nested main -->
+    <main><h2>landmark-main-is-top-level + landmark-no-duplicate-main (main inside main)</h2></main>
+
+    <!-- VIOLATION landmark-contentinfo-is-top-level: contentinfo nested inside main.
+         Uses role="contentinfo" because a bare <footer> inside <main> is NOT a contentinfo landmark. -->
+    <div role="contentinfo"><h2>landmark-contentinfo-is-top-level (contentinfo inside main)</h2></div>
+
+    <!-- VIOLATION landmark-complementary-is-top-level (deprecated): aside nested inside main -->
+    <aside><h2>landmark-complementary-is-top-level (aside inside main)</h2></aside>
+
+    <!-- ===== FRAMES ===== -->
+    <section>
+      <h2>frame-title</h2>
+      <p class="desc">iframe with no title / accessible name</p>
+      <iframe srcdoc="<p>no title</p>" width="150" height="40"></iframe>
+    </section>
+
+    <section>
+      <h2>frame-title-unique</h2>
+      <p class="desc">two iframes sharing the same title</p>
+      <iframe title="Advertisement" srcdoc="<p>a</p>" width="150" height="40"></iframe>
+      <iframe title="Advertisement" srcdoc="<p>b</p>" width="150" height="40"></iframe>
+    </section>
+
+    <section>
+      <h2>frame-focusable-content</h2>
+      <p class="desc">iframe with tabindex=-1 but focusable content inside</p>
+      <iframe title="Has focusable content" tabindex="-1" srcdoc="<a href='https://example.com'>focusable link</a>" width="150" height="40"></iframe>
+    </section>
+
+    <section>
+      <h2>frame-tested (best-practice, review)</h2>
+      <p class="desc">iframe whose contents may not be reachable by the scanner</p>
+      <iframe title="Cross-context frame" src="about:blank" width="150" height="40"></iframe>
+    </section>
+
+    <!-- ===== LANG ON ELEMENTS ===== -->
+    <section>
+      <h2>valid-lang</h2>
+      <p class="desc">invalid lang value on a child element</p>
+      <p>The word <span lang="qq">bonjour</span> uses an invalid language subtag.</p>
+    </section>
+
+    <!-- ===== DUPLICATE ID IN ARIA ===== -->
+    <section>
+      <h2>duplicate-id-aria</h2>
+      <p class="desc">two elements share an id that is used for labelling</p>
+      <span id="dup-aria">Label text</span>
+      <span id="dup-aria">Another element, same id</span>
+      <input type="text" aria-labelledby="dup-aria">
+    </section>
+  </main>
+
+  <!-- VIOLATION landmark-no-duplicate-contentinfo: two top-level contentinfos -->
+  <footer><h2>landmark-no-duplicate-contentinfo (contentinfo #1)</h2></footer>
+  <footer><h2>landmark-no-duplicate-contentinfo (contentinfo #2)</h2>
+    <a href="index.html">Back to index</a> · <a href="lang-invalid.html">Invalid html lang page</a>
+  </footer>
+</body>
+</html>

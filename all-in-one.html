@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>a11y rule demo — all rules on one page</title>
+  <!-- VIOLATION meta-refresh / meta-refresh-no-exceptions (AAA): delayed refresh (1h, will not reload during a scan) -->
+  <meta http-equiv="refresh" content="3600">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; }
+    header.top, footer.bottom { background: #222; color: #fff; padding: 8px 16px; }
+    main { padding: 16px; max-width: 1000px; }
+    section { border: 1px solid #ccc; border-radius: 6px; padding: 12px; margin: 12px 0; }
+    section h2 { margin: 0 0 4px; font: 600 15px/1.3 monospace; color: #b3261e; }
+    section .desc { margin: 0 0 10px; color: #555; font-size: 13px; }
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 8px; top: 8px; }
+    .low-contrast { color: #b3b3b3; background: #ffffff; }
+    p.textblock a { color: inherit; text-decoration: none; }
+    iframe.embed { width: 100%; border: 2px solid #888; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">All axe rules on one page</header>
+
+  <main id="main">
+    <h1>axe-core rule violation demo — single page</h1>
+    <p>Element-level violations are inline below. Page-level rules that contradict each other
+       (lang, title, main, duplicate landmarks, aria-hidden body) are embedded as same-origin
+       <code>srcdoc</code> iframes near the bottom so they can all fire in a single scan.</p>
+
+    <!-- ============ IMAGES / TEXT ALTERNATIVES ============ -->
+    <section data-rule="image-alt"><h2>image-alt</h2><p class="desc">img without alt</p>
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" width="40" height="40"></section>
+    <section data-rule="input-image-alt"><h2>input-image-alt</h2><p class="desc">input type=image without alt</p>
+      <input type="image" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA="></section>
+    <section data-rule="object-alt"><h2>object-alt</h2><p class="desc">object with no text alternative</p>
+      <object data="data:text/html,<b>x</b>" width="60" height="30"></object></section>
+    <section data-rule="role-img-alt"><h2>role-img-alt</h2><p class="desc">[role=img] with no name</p>
+      <div role="img"></div></section>
+    <section data-rule="svg-img-alt"><h2>svg-img-alt</h2><p class="desc">svg[role=img] no title/label</p>
+      <svg role="img" width="40" height="40"><circle cx="20" cy="20" r="18" fill="#69c"/></svg></section>
+    <section data-rule="area-alt"><h2>area-alt</h2><p class="desc">image-map area without alt</p>
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" width="80" height="40" usemap="#m">
+      <map name="m"><area shape="rect" coords="0,0,40,40" href="https://example.com"></map></section>
+    <section data-rule="image-redundant-alt"><h2>image-redundant-alt</h2><p class="desc">alt repeated as adjacent text</p>
+      <a href="https://example.com"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="Home" width="24" height="24"> Home</a></section>
+    <section data-rule="server-side-image-map"><h2>server-side-image-map</h2><p class="desc">ismap image in a link</p>
+      <a href="https://example.com"><img ismap src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="map" width="40" height="40"></a></section>
+
+    <!-- ============ FORMS ============ -->
+    <section data-rule="label"><h2>label</h2><p class="desc">input with no label</p><input type="text"></section>
+    <section data-rule="select-name"><h2>select-name</h2><p class="desc">select with no name</p><select><option>One</option></select></section>
+    <section data-rule="input-button-name"><h2>input-button-name</h2><p class="desc">input button empty value</p><input type="submit" value=""></section>
+    <section data-rule="form-field-multiple-labels"><h2>form-field-multiple-labels</h2><p class="desc">two labels for one field</p>
+      <label for="mlbl">First</label><label for="mlbl">Second</label><input id="mlbl" type="text"></section>
+    <section data-rule="autocomplete-valid"><h2>autocomplete-valid</h2><p class="desc">invalid autocomplete token</p>
+      <label for="ac">Name</label><input id="ac" type="text" autocomplete="totally-invalid-token"></section>
+    <section data-rule="label-title-only"><h2>label-title-only</h2><p class="desc">labelled only via title</p><input type="text" title="Search query"></section>
+    <section data-rule="avoid-inline-spacing"><h2>avoid-inline-spacing</h2><p class="desc">letter-spacing !important</p>
+      <p style="letter-spacing: 0 !important; word-spacing: 0 !important; line-height: 1 !important;">Spacing forced below the WCAG minimum and locked with !important.</p></section>
+
+    <!-- ============ BUTTONS / LINKS / NAMES ============ -->
+    <section data-rule="button-name"><h2>button-name</h2><p class="desc">button with no text</p><button></button></section>
+    <section data-rule="link-name"><h2>link-name</h2><p class="desc">link with no text</p><a href="https://example.com"></a></section>
+    <section data-rule="link-in-text-block"><h2>link-in-text-block</h2><p class="desc">link set off from text only by a too-subtle color, no underline</p>
+      <p style="color:#595959;">This paragraph has a <a href="https://example.com" style="color:#6b6b6b; text-decoration:none;">subtly colored link</a> distinguished only by color.</p></section>
+    <section data-rule="summary-name"><h2>summary-name</h2><p class="desc">summary with no text</p><details><summary></summary>Body.</details></section>
+    <section data-rule="nested-interactive"><h2>nested-interactive</h2><p class="desc">interactive nested in interactive</p>
+      <button type="button">Outer <a href="https://example.com">inner link</a></button></section>
+    <section data-rule="label-content-name-mismatch"><h2>label-content-name-mismatch (experimental)</h2><p class="desc">visible text not in accessible name</p>
+      <button aria-label="Submit">Cancel</button></section>
+
+    <!-- ============ ARIA ============ -->
+    <section data-rule="aria-allowed-attr"><h2>aria-allowed-attr</h2><p class="desc">aria attr not supported by role</p><div role="button" tabindex="0" aria-selected="true">Press</div></section>
+    <section data-rule="aria-required-attr"><h2>aria-required-attr</h2><p class="desc">checkbox missing aria-checked</p><div role="checkbox" tabindex="0">Accept</div></section>
+    <section data-rule="aria-roles"><h2>aria-roles</h2><p class="desc">invalid role</p><div role="not-a-real-role">x</div></section>
+    <section data-rule="aria-valid-attr"><h2>aria-valid-attr</h2><p class="desc">non-existent aria- attribute</p><div aria-notreal="foo">x</div></section>
+    <section data-rule="aria-valid-attr-value"><h2>aria-valid-attr-value</h2><p class="desc">invalid attribute value</p><div role="button" tabindex="0" aria-expanded="banana">Toggle</div></section>
+    <section data-rule="aria-required-children"><h2>aria-required-children</h2><p class="desc">role=menu with no children</p><div role="menu"></div></section>
+    <section data-rule="aria-required-parent"><h2>aria-required-parent</h2><p class="desc">menuitem with no menu parent</p><div role="menuitem">Item</div></section>
+    <section data-rule="aria-hidden-focus"><h2>aria-hidden-focus</h2><p class="desc">aria-hidden with focusable child</p><div aria-hidden="true"><button type="button">Hidden focusable</button></div></section>
+    <section data-rule="aria-input-field-name"><h2>aria-input-field-name</h2><p class="desc">role=textbox no name</p><div role="textbox" tabindex="0" contenteditable="true"></div></section>
+    <section data-rule="aria-meter-name"><h2>aria-meter-name</h2><p class="desc">role=meter no name</p><div role="meter" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div></section>
+    <section data-rule="aria-progressbar-name"><h2>aria-progressbar-name</h2><p class="desc">role=progressbar no name</p><div role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div></section>
+    <section data-rule="aria-toggle-field-name"><h2>aria-toggle-field-name</h2><p class="desc">role=switch no name</p><div role="switch" tabindex="0" aria-checked="false"></div></section>
+    <section data-rule="aria-tab-name"><h2>aria-tab-name</h2><p class="desc">role=tab no name</p><div role="tablist"><div role="tab" tabindex="0"></div></div></section>
+    <section data-rule="aria-tooltip-name"><h2>aria-tooltip-name</h2><p class="desc">role=tooltip no name</p><div role="tooltip"></div></section>
+    <section data-rule="aria-command-name"><h2>aria-command-name</h2><p class="desc">role=link no name</p><div role="link" tabindex="0"></div></section>
+    <section data-rule="aria-deprecated-role"><h2>aria-deprecated-role</h2><p class="desc">deprecated role directory</p><div role="directory">x</div></section>
+    <section data-rule="aria-prohibited-attr"><h2>aria-prohibited-attr</h2><p class="desc">aria-label where prohibited</p><p aria-label="prohibited name">Paragraph.</p></section>
+    <section data-rule="aria-braille-equivalent"><h2>aria-braille-equivalent</h2><p class="desc">aria-brailleroledescription with no aria-roledescription equivalent</p><button aria-brailleroledescription="btn">Save</button></section>
+    <section data-rule="aria-dialog-name"><h2>aria-dialog-name</h2><p class="desc">role=dialog no name</p><div role="dialog">Dialog</div></section>
+    <section data-rule="aria-treeitem-name"><h2>aria-treeitem-name</h2><p class="desc">treeitem no name</p><div role="tree"><div role="treeitem" tabindex="0"></div></div></section>
+    <section data-rule="aria-text"><h2>aria-text</h2><p class="desc">role=text with focusable child</p><div role="text">Hello <a href="https://example.com">focusable</a></div></section>
+    <section data-rule="aria-allowed-role"><h2>aria-allowed-role</h2><p class="desc">role not appropriate for element</p><a href="https://example.com" role="banner">Link as banner</a></section>
+    <section data-rule="aria-roledescription"><h2>aria-roledescription (deprecated)</h2><p class="desc">roledescription on element without role</p><div aria-roledescription="fancy widget">x</div></section>
+    <section data-rule="presentation-role-conflict"><h2>presentation-role-conflict</h2><p class="desc">focusable/interactive element marked presentational</p><a href="https://example.com" role="presentation" aria-label="conflict">Focusable link marked presentational</a></section>
+    <section data-rule="focus-order-semantics"><h2>focus-order-semantics (experimental)</h2><p class="desc">focusable with no role</p><div tabindex="0">Focusable div, no role</div></section>
+
+    <!-- ============ TABLES ============ -->
+    <section data-rule="td-headers-attr"><h2>td-headers-attr</h2><p class="desc">headers points to missing id</p><table><tr><th id="h1x">A</th><td headers="does-not-exist">1</td></tr></table></section>
+    <section data-rule="th-has-data-cells"><h2>th-has-data-cells</h2><p class="desc">th with no data cells</p><table><tr><th>Header, no data</th></tr></table></section>
+    <section data-rule="scope-attr-valid"><h2>scope-attr-valid</h2><p class="desc">invalid scope</p><table><tr><th scope="banana">H</th><td>1</td></tr></table></section>
+    <section data-rule="empty-table-header"><h2>empty-table-header</h2><p class="desc">empty th</p><table><tr><th></th><th>Name</th></tr><tr><td>1</td><td>Bob</td></tr></table></section>
+    <section data-rule="table-duplicate-name"><h2>table-duplicate-name</h2><p class="desc">caption equals summary</p><table summary="Sales data"><caption>Sales data</caption><tr><th>Q</th><td>1</td></tr></table></section>
+    <section data-rule="table-fake-caption"><h2>table-fake-caption (experimental)</h2><p class="desc">first row acts as caption</p><table><tr><td colspan="2">Quarterly report</td></tr><tr><th>Q</th><th>Amount</th></tr><tr><td>Q1</td><td>100</td></tr></table></section>
+    <section data-rule="td-has-header"><h2>td-has-header (experimental)</h2><p class="desc">cell in &gt;3x3 table with no header</p>
+      <table><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><td>5</td><td>6</td><td>7</td><td>8</td></tr><tr><td>9</td><td>10</td><td>11</td><td>12</td></tr><tr><td>13</td><td>14</td><td>15</td><td>16</td></tr></table></section>
+
+    <!-- ============ LISTS ============ -->
+    <section data-rule="list"><h2>list</h2><p class="desc">ul with non-li child</p><ul><div>Not a list item</div></ul></section>
+    <section data-rule="listitem"><h2>listitem</h2><p class="desc">li outside ul/ol</p><li>Orphan list item</li></section>
+    <section data-rule="definition-list"><h2>definition-list</h2><p class="desc">dl invalid structure</p><dl><div>Wrong child</div></dl></section>
+    <section data-rule="dlitem"><h2>dlitem</h2><p class="desc">dt outside dl</p><dt>Orphan term</dt></section>
+
+    <!-- ============ HEADINGS / STRUCTURE ============ -->
+    <section data-rule="empty-heading"><h2>empty-heading</h2><p class="desc">heading with no text</p><h3></h3></section>
+    <section data-rule="heading-order"><h2>heading-order</h2><p class="desc">levels skip h3 to h6</p><h3>Level three</h3><h6>Jumps to six</h6></section>
+    <section data-rule="p-as-heading"><h2>p-as-heading (experimental)</h2><p class="desc">bold/large p as heading</p><p style="font-size:2em;font-weight:bold;">Fake heading</p><p>Body text.</p></section>
+    <section data-rule="tabindex"><h2>tabindex</h2><p class="desc">positive tabindex</p><button type="button" tabindex="5">Positive tabindex</button></section>
+    <section data-rule="accesskeys"><h2>accesskeys</h2><p class="desc">duplicate accesskey</p><button type="button" accesskey="s">One</button><button type="button" accesskey="s">Two</button></section>
+    <section data-rule="duplicate-id"><h2>duplicate-id* (incl. deprecated)</h2><p class="desc">repeated ids</p><span id="dup">first</span><span id="dup">second</span><input id="dupactive" aria-label="a"><input id="dupactive" aria-label="b"></section>
+    <section data-rule="scrollable-region-focusable"><h2>scrollable-region-focusable</h2><p class="desc">scrollable region not focusable</p><div style="height:50px;overflow:auto;border:1px solid #999;"><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p></div></section>
+    <section data-rule="hidden-content"><h2>hidden-content (experimental, review)</h2><p class="desc">hidden content to review</p><div style="display:none">Hidden message</div></section>
+
+    <!-- ============ COLOR ============ -->
+    <section data-rule="color-contrast"><h2>color-contrast + color-contrast-enhanced (AAA)</h2><p class="desc">contrast below AA/AAA</p><p class="low-contrast">Light gray text on white fails contrast.</p></section>
+
+    <!-- ============ TIME & MEDIA ============ -->
+    <section data-rule="blink"><h2>blink</h2><p class="desc">blink element</p><blink>Blinking</blink></section>
+    <section data-rule="marquee"><h2>marquee</h2><p class="desc">marquee element</p><marquee>Scrolling</marquee></section>
+    <section data-rule="video-caption"><h2>video-caption</h2><p class="desc">video with no captions</p><video controls width="120"><source src="movie.mp4" type="video/mp4"></video></section>
+    <section data-rule="no-autoplay-audio"><h2>no-autoplay-audio</h2><p class="desc">autoplaying audio, not muted, no controls</p><audio autoplay src="audio.mp3"></audio></section>
+
+    <!-- ============ LINKS / TARGET ============ -->
+    <section data-rule="identical-links-same-purpose"><h2>identical-links-same-purpose (AAA)</h2><p class="desc">same text, different href</p><a href="https://example.com/a">Read more</a> <a href="https://example.com/b">Read more</a></section>
+    <section data-rule="target-size"><h2>target-size (WCAG 2.2)</h2><p class="desc">touch targets under 24x24</p>
+      <a href="https://example.com" style="display:inline-block;width:10px;height:10px;overflow:hidden;">x</a>
+      <a href="https://example.com" style="display:inline-block;width:10px;height:10px;overflow:hidden;">y</a></section>
+
+    <!-- ============ FRAMES (inline, no page-level conflict) ============ -->
+    <section data-rule="frame-title"><h2>frame-title</h2><p class="desc">iframe with no title</p><iframe srcdoc="<p>no title</p>" width="150" height="40"></iframe></section>
+    <section data-rule="frame-title-unique"><h2>frame-title-unique</h2><p class="desc">two iframes, same title</p>
+      <iframe title="Advertisement" srcdoc="<p>a</p>" width="150" height="40"></iframe>
+      <iframe title="Advertisement" srcdoc="<p>b</p>" width="150" height="40"></iframe></section>
+    <section data-rule="frame-focusable-content"><h2>frame-focusable-content</h2><p class="desc">tabindex=-1 iframe with focusable content</p>
+      <iframe title="Has focusable content" tabindex="-1" srcdoc="<a href=&quot;https://example.com&quot;>link</a>" width="150" height="40"></iframe></section>
+    <section data-rule="frame-tested"><h2>frame-tested (best-practice, review)</h2><p class="desc">frame the scanner may not reach</p><iframe title="Cross-context frame" src="about:blank" width="150" height="40"></iframe></section>
+
+    <!-- ============ PAGE-LEVEL / CONFLICTING RULES (embedded as same-origin iframes) ============ -->
+    <section data-rule="(embedded documents)">
+      <h2>Page-level &amp; contradictory rules — embedded iframes</h2>
+      <p class="desc">Each iframe is a separate same-origin document, so mutually-exclusive page-level rules
+        (missing vs invalid lang, 0 vs 2 mains, aria-hidden body) all fire in one scan. axe / LambdaTest descend into these frames.</p>
+
+      <!-- Doc 1: html-has-lang, document-title, page-has-heading-one, landmark-one-main, region, bypass, skip-link, meta-viewport(+large) -->
+      <iframe class="embed" height="90" title="Structure: missing lang, title, main, heading, bypass"
+        srcdoc='<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><title></title></head><body><div>No lang, empty title, no h1, no main, content outside landmarks; the skip link below targets a missing id.</div><a href="#nope">Skip to content</a></body></html>'></iframe>
+
+      <!-- Doc 2: html-lang-valid -->
+      <iframe class="embed" height="70" title="Invalid html lang value"
+        srcdoc='<!DOCTYPE html><html lang="xyzzy"><head><meta charset="utf-8"><title>invalid lang</title></head><body><main><h1>html-lang-valid</h1><p>The html lang is xyzzy, which is invalid.</p></main></body></html>'></iframe>
+
+      <!-- Doc 3: html-xml-lang-mismatch, duplicate/nested landmarks, landmark-unique, valid-lang, duplicate-id-aria -->
+      <iframe class="embed" height="140" title="Duplicate landmarks and invalid element lang"
+        srcdoc='<!DOCTYPE html><html lang="en" xml:lang="fr"><head><meta charset="utf-8"><title>landmarks</title></head><body><header><p>banner 1</p></header><header><p>banner 2</p></header><nav aria-label="Primary"><p>nav 1</p></nav><nav aria-label="Primary"><p>nav 2</p></nav><main><h1>Landmarks</h1><header><p>nested banner</p></header><main><p>nested main</p></main><footer><p>nested contentinfo</p></footer><aside><p>nested complementary</p></aside><p>The word <span lang="qq">bonjour</span> uses an invalid subtag.</p><span id="da">x</span><span id="da">y</span><input type="text" aria-labelledby="da"></main><footer><p>contentinfo 1</p></footer><footer><p>contentinfo 2</p></footer></body></html>'></iframe>
+
+      <!-- Doc 4: aria-hidden-body -->
+      <iframe class="embed" height="70" title="aria-hidden on body"
+        srcdoc='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>aria hidden body</title></head><body aria-hidden="true"><main><h1>aria-hidden-body</h1><p>The body is aria-hidden.</p></main></body></html>'></iframe>
+    </section>
+  </main>
+
+  <footer class="bottom">Single-page demo — element rules inline, page-level rules embedded as iframes.</footer>
+</body>
+</html>

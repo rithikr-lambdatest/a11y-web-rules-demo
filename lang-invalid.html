@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- VIOLATION html-lang-valid: the <html> lang attribute has an invalid value -->
+<html lang="xyzzy">
+<head>
+  <meta charset="utf-8">
+  <!-- VIOLATION meta-viewport-large: zoom is allowed but capped at 2x, below the ~5x guideline.
+       (meta-viewport itself passes here since scaling >= 2x is permitted — the two rules need
+       different viewport tags, so meta-viewport-large lives here and meta-viewport on page-structure.html.) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <title>a11y demo — invalid html lang</title>
+</head>
+<body>
+  <main>
+    <h1>html-lang-valid</h1>
+    <p>The &lt;html&gt; element has <code>lang="xyzzy"</code>, which is not a valid language tag.</p>
+    <p><a href="index.html">Back to index</a></p>
+  </main>
+</body>
+</html>

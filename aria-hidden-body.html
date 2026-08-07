@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>a11y demo — aria-hidden on body</title>
+</head>
+<!-- VIOLATION aria-hidden-body: aria-hidden="true" on the document body hides the entire page
+     from assistive technology. Isolated on its own page because it suppresses all other content. -->
+<body aria-hidden="true">
+  <main>
+    <h1>aria-hidden-body</h1>
+    <p>The &lt;body&gt; has <code>aria-hidden="true"</code>, so nothing here is exposed to screen readers.</p>
+    <p><a href="index.html">Back to index</a></p>
+  </main>
+</body>
+</html>
