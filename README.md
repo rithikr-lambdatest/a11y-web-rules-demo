@@ -8,6 +8,21 @@ The rules are split across pages because several are **mutually exclusive at the
 level** — e.g. you can't have both "no `lang`" and "invalid `lang`", or both "no `main`"
 and "duplicate `main`", on the same page.
 
+## Live URLs (GitHub Pages)
+
+Hosted at **https://rithikr-lambdatest.github.io/a11y-web-rules-demo/** — point axe / a LambdaTest scan directly at these:
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Index | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/ | Element-level violations; page-level rules satisfied on purpose |
+| All-in-one | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/all-in-one.html | **One-scan URL** — 102/105 rules (uses `srcdoc` iframes) |
+| aria-hidden body | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/aria-hidden-body.html | `aria-hidden` on `<body>` |
+| Landmarks/frames/lang | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/landmarks-frames-lang.html | Duplicate landmarks, frames, invalid element `lang` |
+| Invalid lang | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/lang-invalid.html | Invalid `lang` value |
+| Page structure | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/page-structure.html | Missing `lang`/`title`/`h1`/`main`, no bypass |
+
+For a single full-coverage scan, use **`all-in-one.html`** (requires the scanner to descend into same-origin `srcdoc` iframes; otherwise use the split pages).
+
 ## `all-in-one.html` — everything on one page (one scan)
 
 A single self-contained page covering the same **102 of 105** rules. Element-level
