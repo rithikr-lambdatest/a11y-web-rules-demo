@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wanderly — Keyboard IGT Fixture</title>
+<style>
+  :root{--ink:#16233a;--muted:#5b6b86;--line:#dde3ec;--brand:#0b6cf5;--bg:#f6f8fb}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+  header{position:sticky;top:0;z-index:900;background:#fff;border-bottom:1px solid var(--line);padding:10px 24px;display:flex;align-items:center;gap:22px}
+  nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:6px 2px}
+  main{max-width:960px;margin:0 auto;padding:24px}
+  section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 20px}
+  h1{font-size:26px;margin:.2em 0 .4em} h2{font-size:19px;margin:0 0 4px} h3{font-size:16px;margin:18px 0 6px}
+  p{color:var(--muted);margin:.4em 0}
+  label{display:block;font-weight:600;font-size:13px;margin:0 0 4px}
+  input,select,textarea{font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:7px;width:100%;background:#fff}
+  button{font:inherit;padding:9px 16px;border-radius:7px;border:1px solid var(--brand);background:var(--brand);color:#fff;font-weight:600;cursor:pointer}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .card{border:1px solid var(--line);border-radius:9px;padding:14px;background:#fff}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a97ab}
+  footer{padding:26px 24px;color:var(--muted)}
+  footer a{color:var(--muted);margin-right:16px}
+
+  /* ---- RULE 4 variants ---------------------------------------------- */
+  .kill-outline:focus{outline:none}                                   /* FAIL: no change at all */
+  /* both colours are fully transparent, but textually different, so the diff sees a change
+     that is not actually visible - the suppressed-outline antipattern */
+  .transparent-ring{outline:2px solid rgba(255,0,0,0)}
+  .transparent-ring:focus{outline:2px solid rgba(0,0,255,0)}          /* FAIL: transparent -> transparent */
+  .pseudo-ring{position:relative;outline:none}
+  .pseudo-ring:focus::after{content:"";position:absolute;inset:-4px;border:3px solid #e4572e;border-radius:9px} /* heuristic MISSES, AI should catch */
+  .animated-ring{outline:none}
+  @keyframes glow{from{box-shadow:0 0 0 0 rgba(11,108,245,0)}to{box-shadow:0 0 0 4px rgba(11,108,245,.65)}}
+  .animated-ring:focus{animation:glow .35s forwards}                  /* heuristic likely misses */
+  .good-ring:focus{outline:3px solid #0b6cf5;outline-offset:2px}      /* PASS */
+
+  /* ---- RULE 3 variants ---------------------------------------------- */
+  .zero-size{width:0;height:0;overflow:hidden;display:inline-block;padding:0;border:0}
+  .offscreen{position:absolute;left:-9999px;top:auto}
+
+  /* ---- RULES 7 & 8: obscuring overlays ------------------------------ */
+  .obscure-host{position:relative}
+  .cover-all{position:absolute;inset:-2px;background:rgba(22,35,58,.92);border-radius:7px;z-index:5;
+             color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .cover-half{position:absolute;left:-2px;right:-2px;bottom:-2px;height:58%;background:rgba(22,35,58,.92);
+              border-radius:0 0 7px 7px;z-index:5;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+
+  /* ---- RULE 2: unmarked clickables ---------------------------------- */
+  .fake-btn{display:inline-block;padding:9px 16px;border-radius:7px;background:#0b6cf5;color:#fff;font-weight:600;cursor:pointer}
+  .clickable-card{cursor:pointer}
+  .more-link{color:var(--brand);font-weight:600;cursor:pointer}
+
+  dialog::backdrop{background:rgba(10,18,32,.55)}
+  dialog{border:0;border-radius:12px;padding:22px;max-width:420px}
+</style>
+</head>
+<body>
+
+<a class="good-ring" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+
+<header>
+  <!-- RULE 3: nameless link (icon-only, span has no text) -->
+  <a href="/" class="kill-outline" aria-label=""><span aria-hidden="true" style="display:inline-block;width:26px;height:26px;background:#0b6cf5;border-radius:6px"></span></a>
+  <nav class="row" aria-label="Primary">
+    <!-- RULE 4: no focus change -->
+    <a class="kill-outline" href="#flights">Flights</a>
+    <a class="kill-outline" href="#hotels">Hotels</a>
+    <a class="kill-outline" href="#trains">Trains</a>
+    <a class="kill-outline" href="#offers">Offers</a>
+  </nav>
+  <button class="kill-outline" style="margin-left:auto">Sign in</button>
+</header>
+
+<main id="main">
+
+  <h1>Plan your next trip</h1>
+  <p>Search flights, hotels and trains across 900+ destinations. Members save up to 20% on selected stays.</p>
+
+  <!-- =========================================================== -->
+  <section aria-labelledby="s-search">
+    <span class="tag">Booking</span>
+    <h2 id="s-search">Search</h2>
+    <p>A realistic form: text fields, dates, dropdowns, radios, a checkbox and a textarea.</p>
+    <p><strong>Note — rule 1, escapable variant:</strong> <em>Departure</em> tabs through its
+    <code>dd</code> / <code>mm</code> / <code>yyyy</code> segments normally, but once on
+    <code>yyyy</code> it swallows Tab — press <kbd>Esc</kbd> to move on. The walk should pause there
+    and ask the reviewer to escape; escaping means <em>not</em> a trap, and the resumed stop is
+    <code>programmaticFocus</code>, so rule 4 must be skipped on it. <em>Return</em> is an ordinary
+    date field for contrast.</p>
+
+    <div class="row" role="radiogroup" aria-label="Trip type" style="margin:10px 0 14px">
+      <label style="font-weight:500"><input class="kill-outline" type="radio" name="trip" value="oneway" checked style="width:auto"> One way</label>
+      <label style="font-weight:500"><input class="kill-outline" type="radio" name="trip" value="round" style="width:auto"> Round trip</label>
+      <label style="font-weight:500"><input class="kill-outline" type="radio" name="trip" value="multi" style="width:auto"> Multi city</label>
+    </div>
+
+    <div class="grid">
+      <div><label for="from">From</label><input class="kill-outline" id="from" placeholder="Delhi (DEL)"></div>
+      <div><label for="to">To</label><input class="kill-outline" id="to" placeholder="Mumbai (BOM)"></div>
+      <div><label for="depart">Departure</label><input class="kill-outline" id="depart" type="date"></div>
+      <div><label for="ret">Return</label><input class="kill-outline" id="ret" type="date"></div>
+    </div>
+
+    <div class="grid" style="margin-top:12px">
+      <div><label for="pax">Travellers</label>
+        <select class="good-ring" id="pax"><option>1 adult</option><option>2 adults</option><option>Family</option></select></div>
+      <div><label for="cabin">Cabin</label>
+        <select class="kill-outline" id="cabin"><option>Economy</option><option>Premium</option><option>Business</option></select></div>
+      <div><label for="curr">Currency</label>
+        <select class="good-ring" id="curr"><option>INR</option><option>USD</option><option>GBP</option></select></div>
+      <div style="display:flex;align-items:flex-end">
+        <label style="font-weight:500"><input class="kill-outline" type="checkbox" style="width:auto"> Direct only</label></div>
+    </div>
+
+    <h3>Special requests</h3>
+    <textarea class="kill-outline" rows="2" aria-label="Special requests" placeholder="Wheelchair, meal preference..."></textarea>
+
+    <div class="row" style="margin-top:14px">
+      <button class="good-ring" type="submit">Search flights</button>
+      <button class="kill-outline" type="button">Reset</button>
+    </div>
+  </section>
+
+  <!-- =========================================================== RULE 4 -->
+  <section aria-labelledby="s-ind">
+    <span class="tag">Rule 4 — focus-indicator-missing</span>
+    <h2 id="s-ind">Focus indicators</h2>
+    <p>Five buttons, each with a different indicator strategy. Tab through them.</p>
+    <div class="row">
+      <button class="kill-outline">No indicator at all</button>
+      <button class="transparent-ring">Transparent → transparent</button>
+      <button class="pseudo-ring">Pseudo-element ring</button>
+      <button class="animated-ring">Animated ring</button>
+      <button class="good-ring">Proper visible ring</button>
+    </div>
+    <p style="margin-top:10px"><strong>Expected:</strong> 1 and 2 fail on the style diff. 3 and 4 are drawn where computed style cannot see them — the heuristic should pass them and AI should fail them. 5 passes everywhere.</p>
+  </section>
+
+  <!-- =========================================================== RULE 3 -->
+  <section aria-labelledby="s-hidden">
+    <span class="tag">Rule 3 — focus-on-hidden-item</span>
+    <h2 id="s-hidden">Focusable but not perceivable</h2>
+    <p>Four focusable elements that a sighted keyboard user cannot see or identify.</p>
+    <a class="zero-size" href="#zero">Zero sized link</a>
+    <button class="offscreen">Off screen button</button>
+    <button aria-hidden="true" tabindex="0" class="kill-outline">Aria-hidden button</button>
+    <a class="kill-outline" href="#nameless"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="18" height="18" alt=""></a>
+    <p><strong>Expected:</strong> all four fail. The labelled <code>input</code>s above must <em>not</em> — naming is the Interactive IGT's job.</p>
+  </section>
+
+  <!-- =========================================================== RULE 2 -->
+  <section aria-labelledby="s-cand">
+    <span class="tag">Rule 2 — keyboard-inaccessible</span>
+    <h2 id="s-cand">Unmarked controls</h2>
+    <p>Things that look and behave like controls but are not reachable by Tab.</p>
+    <div class="row" style="margin-bottom:12px">
+      <div class="fake-btn" onclick="alert&&void 0">Apply filter</div>
+      <span class="more-link" onclick="void 0">More options</span>
+    </div>
+    <div class="card clickable-card" onclick="void 0" style="max-width:420px">
+      <h3 style="margin-top:0">Taj Palace, New Delhi</h3>
+      <p>Luxury 5-star with pool and spa. Free cancellation until 24h before check-in.</p>
+      <a class="good-ring" href="#hotel-details">View hotel details</a>
+    </div>
+    <p><strong>Expected:</strong> the first two are genuine failures. The card is the false positive — its keyboard path is the inner link, so AI should flip it to passed.</p>
+  </section>
+
+  <!-- =========================================================== RULES 7 & 8 -->
+  <section aria-labelledby="s-obsc">
+    <span class="tag">Rules 7 &amp; 8 — obscured</span>
+    <h2 id="s-obsc">Covered while focused</h2>
+    <div class="row" style="gap:22px;margin-top:10px">
+      <span class="obscure-host"><button class="good-ring">Fully covered button</button><span class="cover-all">promo overlay</span></span>
+      <span class="obscure-host"><button class="good-ring">Half covered button</button><span class="cover-half">cookie bar</span></span>
+      <button class="good-ring">Not covered</button>
+    </div>
+    <p style="margin-top:14px"><strong>Expected:</strong> one fully-obscured failure, one partially-obscured failure, and no element carrying both.</p>
+  </section>
+
+  <!-- =========================================================== RULES 5 & 6 -->
+  <section aria-labelledby="s-side">
+    <span class="tag">Rules 5 &amp; 6 — side effects on focus</span>
+    <h2 id="s-side">Focus that does something</h2>
+    <div class="grid">
+      <div><label for="hashy">Changes the URL on focus</label>
+        <input class="good-ring" id="hashy" placeholder="focus me" onfocus="location.hash='#submitted-'+Date.now()"></div>
+      <div><label for="popper">Opens a window on focus</label>
+        <input class="good-ring" id="popper" placeholder="focus me" onfocus="window.open('about:blank','_blank','width=320,height=240')"></div>
+    </div>
+    <p><strong>Expected:</strong> one <code>focus-submits-form</code> and one <code>focus-window-launches</code>. If the popup blocker stops the second, the rule cannot fire — check the browser's blocked-popup indicator before recording a miss.</p>
+  </section>
+
+  <!-- =========================================================== realistic filler -->
+  <section aria-labelledby="s-deals">
+    <span class="tag">Content</span>
+    <h2 id="s-deals">Popular right now</h2>
+    <p>Ordinary page furniture, so the walk passes through realistic content between the rule cases.</p>
+    <div class="grid">
+      <div class="card"><h3 style="margin-top:0">Goa</h3><p>From ₹4,199</p><a class="good-ring" href="#goa">See deals</a></div>
+      <div class="card"><h3 style="margin-top:0">Jaipur</h3><p>From ₹3,450</p><a class="kill-outline" href="#jaipur">See deals</a></div>
+      <div class="card"><h3 style="margin-top:0">Kochi</h3><p>From ₹5,090</p><a class="kill-outline" href="#kochi">See deals</a></div>
+      <div class="card"><h3 style="margin-top:0">Shimla</h3><p>From ₹2,760</p><a class="kill-outline" href="#shimla">See deals</a></div>
+    </div>
+    <h3>Baggage rules</h3>
+    <details><summary class="good-ring">Cabin baggage allowance</summary><p>One bag up to 7kg, 55 x 35 x 25 cm.</p></details>
+    <details><summary class="kill-outline">Check-in baggage allowance</summary><p>15kg on domestic economy fares.</p></details>
+    <h3>Fare comparison</h3>
+    <table style="width:100%;border-collapse:collapse">
+      <caption style="text-align:left;color:var(--muted);padding-bottom:6px">Lowest fares this week</caption>
+      <thead><tr><th scope="col" style="text-align:left;border-bottom:1px solid var(--line)">Route</th>
+      <th scope="col" style="text-align:left;border-bottom:1px solid var(--line)">Fare</th>
+      <th scope="col" style="text-align:left;border-bottom:1px solid var(--line)">Book</th></tr></thead>
+      <tbody>
+        <tr><td>DEL → BOM</td><td>₹3,120</td><td><a class="kill-outline" href="#b1">Book</a></td></tr>
+        <tr><td>BLR → HYD</td><td>₹2,480</td><td><a class="kill-outline" href="#b2">Book</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =========================================================== RULE 1 (last on purpose) -->
+  <section aria-labelledby="s-trap">
+    <span class="tag">Rule 1 — keyboard-trap</span>
+    <h2 id="s-trap">Focus trap</h2>
+    <p>Deliberately last in the tab order, so every rule above is reached before the walk can be blocked.</p>
+    <button class="good-ring" id="open-trap">Open the trapping dialog</button>
+    <div id="trap" style="display:none;border:2px dashed #e4572e;border-radius:9px;padding:16px;margin-top:12px">
+      <h3 style="margin-top:0">Subscribe to fare alerts</h3>
+      <p>Tab is swallowed inside this box — focus cannot leave by keyboard.</p>
+      <input class="good-ring" id="trap-a" aria-label="Email" placeholder="you@example.com">
+      <div class="row" style="margin-top:10px">
+        <button class="good-ring" id="trap-b">Subscribe</button>
+        <button class="good-ring" id="trap-c">Maybe later</button>
+      </div>
+    </div>
+    <p style="margin-top:10px"><strong>Expected:</strong> the walk detects a dead end and asks the reviewer to escape. Escaping resumes just past the trap — and that resumed stop is <code>programmaticFocus</code>, so rule 4 must be skipped on it.</p>
+  </section>
+
+</main>
+
+<footer>
+  <a class="kill-outline" href="#about">About</a>
+  <a class="kill-outline" href="#careers">Careers</a>
+  <a class="kill-outline" href="#privacy">Privacy</a>
+  <a class="good-ring" href="#contact">Contact</a>
+  <p style="margin-top:14px">© Wanderly — fixture page for the Keyboard IGT. Not a real booking site.</p>
+</footer>
+
+<script>
+  // Rule 1, escapable variant — Departure only. A native date field has three internal
+  // segments, so Tab walks dd -> mm -> yyyy before it would leave the field. Those two hops
+  // are allowed through; from yyyy onwards Tab is swallowed and only Escape gets you out.
+  // Return is left alone as an ordinary date field for contrast.
+  var FOCUSABLE = 'a[href],button,input,select,textarea,summary,[tabindex]:not([tabindex="-1"])';
+  var depart = document.getElementById('depart');
+  var segment = 0;                                 // 0 = dd, 1 = mm, 2 = yyyy
+  depart.addEventListener('focus', function () { segment = 0; });
+  depart.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab' && !e.shiftKey) {
+      if (segment < 2) { segment++; return; }      // dd -> mm -> yyyy passes through
+      e.preventDefault();                          // on yyyy: trapped
+    } else if (e.key === 'Escape') {
+      var all = Array.prototype.slice.call(document.querySelectorAll(FOCUSABLE));
+      var next = all[all.indexOf(depart) + 1];
+      if (next) { next.focus(); }                  // Escape is the only way out
+    }
+  });
+
+  // Rule 1: a dead-end trap — Tab and Shift+Tab are swallowed inside #trap.
+  var trap = document.getElementById('trap');
+  document.getElementById('open-trap').addEventListener('click', function () {
+    trap.style.display = 'block';
+    document.getElementById('trap-a').focus();
+  });
+  trap.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab') { e.preventDefault(); }        // focus never leaves
+  });
+</script>
+</body>
+</html>

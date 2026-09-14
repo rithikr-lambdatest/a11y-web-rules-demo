@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility test pages — index</title>
+  <style>
+    :root{--ink:#1a2332;--muted:#5c6b7f;--line:#d9e0e8;--brand:#0b5fd0;--bg:#f5f7fa;--warn:#b3261e}
+    *{box-sizing:border-box}
+    body{margin:0;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+    header{background:#1a2332;color:#fff;padding:20px 24px}
+    header p{margin:6px 0 0;color:#b9c4d2;max-width:70ch}
+    main{max-width:1040px;margin:0 auto;padding:24px}
+    h1{margin:0;font-size:23px}
+    h2{font-size:18px;margin:28px 0 4px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+    h2:first-of-type{margin-top:8px}
+    .lede{color:var(--muted);margin:4px 0 14px;max-width:80ch}
+    table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    caption{text-align:left;color:var(--muted);font-size:13px;padding:0 0 8px}
+    th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{background:#eef2f7;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:#44546a}
+    tr:last-child td{border-bottom:0}
+    td.page{white-space:nowrap;font-weight:600}
+    a{color:var(--brand)}
+    a:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:3px}
+    code{background:#eef2f7;padding:1px 5px;border-radius:4px;font-size:.92em}
+    .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+          padding:2px 7px;border-radius:999px;background:#e4ecf7;color:#1c4e9c;margin-left:6px;vertical-align:1px}
+    .note{background:#fff8e6;border:1px solid #f0dda6;border-radius:8px;padding:12px 14px;margin:16px 0;color:#6b5518}
+    footer{padding:22px 24px;color:var(--muted);font-size:13px}
+    .skip{position:absolute;left:-9999px}
+    .skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:10}
+  </style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <h1>Accessibility test pages</h1>
+  <p>Every page linked below deliberately fails accessibility rules. Point axe or a LambdaTest
+     accessibility scan at one and confirm the scanner reports what the page is built to fail.</p>
+</header>
+
+<main id="main">
+
+  <div class="note">
+    <strong>This page is not a test fixture.</strong> It is a plain index and is built to be
+    accessible, so scanning it will not produce meaningful violations. Scan the pages it links to.
+  </div>
+
+  <h2>axe-core rule demos</h2>
+  <p class="lede">Split across pages because several rules are mutually exclusive at the page level —
+     a document cannot have both a missing and an invalid <code>lang</code>, or both zero and two
+     <code>&lt;main&gt;</code> elements.</p>
+
+  <table>
+    <caption>Static pages covering axe-core 4.12 rules</caption>
+    <thead>
+      <tr><th scope="col">Page</th><th scope="col">What it covers</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="page"><a href="./">Index</a></td>
+        <td>Element-level violations; page-level rules satisfied on purpose so the element failures are isolated.</td>
+      </tr>
+      <tr>
+        <td class="page"><a href="all-in-one.html">All-in-one</a><span class="pill">one scan</span></td>
+        <td>102 of 105 rules on a single URL. Page-level rules that contradict each other are embedded as
+            same-origin <code>srcdoc</code> iframes, so the scanner must descend into them.</td>
+      </tr>
+      <tr>
+        <td class="page"><a href="aria-hidden-body.html">aria-hidden body</a></td>
+        <td><code>aria-hidden</code> on <code>&lt;body&gt;</code>.</td>
+      </tr>
+      <tr>
+        <td class="page"><a href="landmarks-frames-lang.html">Landmarks / frames / lang</a></td>
+        <td>Duplicate landmarks, frames, invalid element <code>lang</code>.</td>
+      </tr>
+      <tr>
+        <td class="page"><a href="lang-invalid.html">Invalid lang</a></td>
+        <td>Invalid <code>lang</code> value.</td>
+      </tr>
+      <tr>
+        <td class="page"><a href="page-structure.html">Page structure</a></td>
+        <td>Missing <code>lang</code>, <code>title</code>, <code>h1</code>, <code>main</code>; no bypass mechanism.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Guided test (IGT) fixtures</h2>
+  <p class="lede">Built for the Intelligent Guided Tests rather than a static axe scan. Each is a
+     realistic page whose elements are arranged so every rule in that IGT fails on at least one
+     element, with a passing counterpart beside it so false positives are visible too.</p>
+
+  <table>
+    <caption>Pages driven through a guided test walk</caption>
+    <thead>
+      <tr><th scope="col">Page</th><th scope="col">What it covers</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="page"><a href="keyboard-igt.html">Keyboard IGT</a></td>
+        <td>All 8 Keyboard rules: focus trap, unmarked controls, focus on hidden items, missing focus
+            indicator, focus that submits a form or opens a window, and fully / partially obscured focus.
+            <strong>Scan at WCAG 2.2 AAA</strong> — the two obscured rules are 2.4.11 (AA) and 2.4.12 (AAA),
+            so a WCAG 2.1 A scan silently reports only 6 of the 8.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</main>
+
+<footer>
+  <p>Fixtures for accessibility scanner verification. Nothing here is a real product page.</p>
+</footer>
+</body>
+</html>

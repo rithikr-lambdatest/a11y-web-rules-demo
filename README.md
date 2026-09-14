@@ -10,16 +10,35 @@ and "duplicate `main`", on the same page.
 
 ## Live URLs (GitHub Pages)
 
-Hosted at **https://rithikr-lambdatest.github.io/a11y-web-rules-demo/** — point axe / a LambdaTest scan directly at these:
+Hosted at **https://rithikr-lambdatest.github.io/a11y-web-rules-demo/** — point axe / a LambdaTest scan directly at these.
+
+**[hub.html](https://rithikr-lambdatest.github.io/a11y-web-rules-demo/hub.html) links to every page below** — open that if you just want to pick one. It is a plain index, built to be accessible, so it is not itself a fixture.
+
+### axe-core rule demos
 
 | Page | URL | Purpose |
 |------|-----|---------|
+| Hub | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/hub.html | Links to every page here — not a fixture |
 | Index | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/ | Element-level violations; page-level rules satisfied on purpose |
 | All-in-one | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/all-in-one.html | **One-scan URL** — 102/105 rules (uses `srcdoc` iframes) |
 | aria-hidden body | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/aria-hidden-body.html | `aria-hidden` on `<body>` |
 | Landmarks/frames/lang | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/landmarks-frames-lang.html | Duplicate landmarks, frames, invalid element `lang` |
 | Invalid lang | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/lang-invalid.html | Invalid `lang` value |
 | Page structure | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/page-structure.html | Missing `lang`/`title`/`h1`/`main`, no bypass |
+
+### Guided test (IGT) fixtures
+
+Built for the Intelligent Guided Tests rather than a static axe scan. Each is a realistic page
+whose elements are arranged so every rule in that IGT fails on at least one element, with a
+passing counterpart beside it so false positives are visible too.
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Keyboard IGT | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/keyboard-igt.html | All 8 Keyboard rules — **scan at WCAG 2.2 AAA** |
+
+> **Scan the Keyboard fixture at WCAG 2.2 AAA.** Two of its rules are `focus-fully-obscured`
+> (2.4.11, AA) and `focus-partially-obscured` (2.4.12, AAA) — both WCAG **2.2** criteria. A
+> WCAG 2.1 A scan cannot report them and silently returns 6 of the 8 rules.
 
 For a single full-coverage scan, use **`all-in-one.html`** (requires the scanner to descend into same-origin `srcdoc` iframes; otherwise use the split pages).
 
