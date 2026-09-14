@@ -35,6 +35,7 @@ passing counterpart beside it so false positives are visible too.
 | Page | URL | Purpose |
 |------|-----|---------|
 | Keyboard IGT | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/keyboard-igt.html | All 8 Keyboard rules — **scan at WCAG 2.2 AAA** |
+| Images IGT | https://rithikr-lambdatest.github.io/a11y-web-rules-demo/images-igt.html | All 13 Images rules |
 
 > **Scan the Keyboard fixture at WCAG 2.2 AAA.** Two of its rules are `focus-fully-obscured`
 > (2.4.11, AA) and `focus-partially-obscured` (2.4.12, AAA) — both WCAG **2.2** criteria. A
