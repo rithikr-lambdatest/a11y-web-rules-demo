@@ -3,193 +3,227 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nimbus Analytics — Images IGT Fixture</title>
+<title>Ledgerly — Images IGT Fixture</title>
 <style>
   :root{--ink:#16233a;--muted:#5b6b86;--line:#dde3ec;--brand:#0b5fd0;--bg:#f6f8fb}
   *{box-sizing:border-box}
   body{margin:0;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
   header{background:#fff;border-bottom:1px solid var(--line);padding:12px 24px;display:flex;align-items:center;gap:24px}
   nav a{color:var(--muted);text-decoration:none;font-weight:600;margin-right:16px}
-  nav a:focus-visible,a:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-  main{max-width:920px;margin:0 auto;padding:24px}
+  a:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+  main{max-width:940px;margin:0 auto;padding:24px}
   section{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 20px}
-  h1{font-size:27px;margin:.2em 0 .35em} h2{font-size:19px;margin:0 0 4px} h3{font-size:15px;margin:18px 0 6px}
+  h1{font-size:27px;margin:.2em 0 .35em} h2{font-size:19px;margin:0 0 4px} h3{font-size:15px;margin:20px 0 6px}
   p{color:var(--muted);margin:.45em 0}
   .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a97ab}
   figure{margin:14px 0} figcaption{font-size:13px;color:var(--muted);margin-top:6px}
   .row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
-  .card{border:1px solid var(--line);border-radius:9px;padding:14px;background:#fff;flex:1 1 210px}
+  .card{border:1px solid var(--line);border-radius:9px;padding:14px;background:#fff;flex:1 1 200px}
   img{max-width:100%;height:auto;display:block}
+  .thumb{width:150px} .med{width:240px} .wide{width:330px}
+  .swatch{width:70px;height:70px;border-radius:8px;border:1px solid var(--line)}
   footer{padding:26px 24px;color:var(--muted)}
-  /* CSS background images - deliberately not <img> */
-  .bg-hero{width:100%;height:170px;border-radius:9px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22380%22%20height%3D%22240%22%20viewBox%3D%220%200%20380%20240%22%3E%20%3Crect%20width%3D%22380%22%20height%3D%22240%22%20fill%3D%22%23bfe0f5%22%2F%3E%20%3Ccircle%20cx%3D%22300%22%20cy%3D%2258%22%20r%3D%2226%22%20fill%3D%22%23ffd870%22%2F%3E%20%3Cpath%20d%3D%22M0%20240%20L96%20108%20L168%20240%20Z%22%20fill%3D%22%236d8b6e%22%2F%3E%20%3Cpath%20d%3D%22M120%20240%20L226%2076%20L330%20240%20Z%22%20fill%3D%22%234f6b52%22%2F%3E%20%3Cpath%20d%3D%22M226%2076%20L260%20130%20L192%20130%20Z%22%20fill%3D%22%23f2f6f8%22%2F%3E%20%3Crect%20y%3D%22200%22%20width%3D%22380%22%20height%3D%2240%22%20fill%3D%22%233f5a43%22%2F%3E%20%3C%2Fsvg%3E");
-            background-size:cover;background-position:center}
-  .bg-chart{width:420px;max-width:100%;height:225px;border-radius:8px;border:1px solid var(--line);
-             background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E");background-size:contain;background-repeat:no-repeat;background-position:center}
-  .bg-ornament{width:100%;height:34px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%2234%22%20viewBox%3D%220%200%20420%2034%22%3E%20%3Cpath%20d%3D%22M10%2017%20Q%20105%20-6%20210%2017%20T%20410%2017%22%20stroke%3D%22%23b9c6da%22%20stroke-width%3D%222.5%22%20fill%3D%22none%22%2F%3E%20%3Ccircle%20cx%3D%22210%22%20cy%3D%2217%22%20r%3D%225%22%20fill%3D%22%23b9c6da%22%2F%3E%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2210%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%20%3C%2Fsvg%3E");
-                background-repeat:no-repeat;background-position:center}
+  .rule{margin:6px 0 0;font-size:12px;line-height:1.45}
+  .rule code{background:#fdecea;color:#9b1c14;padding:1px 6px;border-radius:4px;font-weight:700}
+  .rule.ok code{background:#e7f5ec;color:#1a6b3c}
+  .rule .ans{color:#5b6b86;display:block;margin-top:2px}
+  .rule .ans b{color:#16233a;font-weight:600}
+  .bg-pie{width:260px;height:200px;border-radius:8px;border:1px solid var(--line);
+           background-image:url("images/pie-chart.png");background-size:contain;
+           background-repeat:no-repeat;background-position:center;background-color:#fff}
+  .bg-arabic{width:300px;height:110px;border-radius:8px;border:1px solid var(--line);
+              background-image:url("images/arabic.png");background-size:cover;background-position:center}
+  .bg-yellow{width:100%;height:26px;background-image:url("images/yellow.png");background-size:cover;border-radius:6px}
 </style>
 </head>
 <body>
 
 <header>
-  <!-- PASS: logo image carries a proper name -->
-  <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22150%22%20height%3D%2242%22%20viewBox%3D%220%200%20150%2042%22%3E%20%3Crect%20width%3D%22150%22%20height%3D%2242%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ccircle%20cx%3D%2221%22%20cy%3D%2221%22%20r%3D%2213%22%20fill%3D%22%230b5fd0%22%2F%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2221%22%20r%3D%226%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2242%22%20y%3D%2227%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3ENimbus%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="150" height="42" alt="Nimbus Analytics">
+  <!-- PASS: brand logo, properly named -->
+  <img class="thumb" src="images/testmu.png" alt="Ledgerly" style="width:110px">
   <nav aria-label="Primary">
-    <a href="#product">Product</a><a href="#insights">Insights</a><a href="#pricing">Pricing</a><a href="#docs">Docs</a>
+    <a href="#spend">Spend</a><a href="#receipts">Receipts</a><a href="#integrations">Integrations</a><a href="#settings">Settings</a>
   </nav>
 </header>
 
 <main>
-  <h1>See what your numbers are doing</h1>
-  <p>Nimbus turns raw product events into dashboards your whole team can read. No SQL required.</p>
+  <h1>Every receipt, reconciled</h1>
+  <p>Ledgerly reads your receipts, matches them to card transactions and closes the month for you.</p>
 
-  <!-- ============================================================= -->
-  <section aria-labelledby="s-auto">
-    <span class="tag">Rules 1-6 - decided from markup alone</span>
-    <h2 id="s-auto">Product tour</h2>
-
-    <h3>No text alternative at all</h3>
-    <p>The screenshot below has no <code>alt</code> attribute of any kind.</p>
-    <!-- FAIL image-no-text-alternative (auto) -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260">
-      <figcaption>Revenue by region, quarter over quarter.</figcaption></figure>
-
-    <h3>Alt text that is a filename</h3>
-    <!-- FAIL alt-is-filename -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22380%22%20height%3D%22240%22%20viewBox%3D%220%200%20380%20240%22%3E%20%3Crect%20width%3D%22380%22%20height%3D%22240%22%20fill%3D%22%23bfe0f5%22%2F%3E%20%3Ccircle%20cx%3D%22300%22%20cy%3D%2258%22%20r%3D%2226%22%20fill%3D%22%23ffd870%22%2F%3E%20%3Cpath%20d%3D%22M0%20240%20L96%20108%20L168%20240%20Z%22%20fill%3D%22%236d8b6e%22%2F%3E%20%3Cpath%20d%3D%22M120%20240%20L226%2076%20L330%20240%20Z%22%20fill%3D%22%234f6b52%22%2F%3E%20%3Cpath%20d%3D%22M226%2076%20L260%20130%20L192%20130%20Z%22%20fill%3D%22%23f2f6f8%22%2F%3E%20%3Crect%20y%3D%22200%22%20width%3D%22380%22%20height%3D%2240%22%20fill%3D%22%233f5a43%22%2F%3E%20%3C%2Fsvg%3E" width="380" height="240" alt="hero-banner.png">
-      <figcaption>Our Reykjavik office view.</figcaption></figure>
-
-    <h3>Alt text that says nothing</h3>
+  <!-- ===================================================== deterministic -->
+  <section aria-labelledby="s-feat">
+    <span class="tag">Rules 1 and 4 — missing and empty alternatives</span>
+    <h2 id="s-feat">How it works</h2>
     <div class="row">
-      <!-- FAIL alt-generic (bare generic word) -->
-      <div class="card"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23eaf1fd%22%2F%3E%20%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2230%22%3E%26%239889%3B%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="64" height="64" alt="image">
-        <h3>Fast queries</h3><p>Sub-second aggregation over billions of rows.</p></div>
-      <!-- FAIL alt-generic (generic prefix) -->
-      <div class="card"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23fdf0ea%22%2F%3E%20%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2230%22%3E%26%23128274%3B%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="64" height="64" alt="photo of icon">
-        <h3>SOC 2 compliant</h3><p>Audited annually, encrypted at rest.</p></div>
-      <!-- PASS: a real description -->
-      <div class="card"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23eafdf1%22%2F%3E%20%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2230%22%3E%26%23128101%3B%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="64" height="64" alt="Three people collaborating">
-        <h3>Shared workspaces</h3><p>Dashboards your whole team can edit.</p></div>
+      <!-- FAIL image-no-text-alternative (auto): no alt attribute at all -->
+      <div class="card"><img class="thumb" src="images/camera.jpeg">
+        <p class="rule"><code>image-no-text-alternative</code><span class="ans">auto — no reviewer answer needed</span></p>
+        <h3>Snap it</h3><p>Photograph a receipt and Ledgerly extracts the total.</p></div>
+      <!-- FAIL alt-generic: bare generic word -->
+      <div class="card"><img class="thumb" src="images/folder.png" alt="image">
+        <p class="rule"><code>alt-generic</code><span class="ans">auto — no reviewer answer needed</span></p>
+        <h3>File it</h3><p>Receipts are sorted into folders by project.</p></div>
+      <!-- FAIL alt-generic: generic prefix -->
+      <div class="card"><img class="thumb" src="images/bin.jpeg" alt="photo of icon">
+        <p class="rule"><code>alt-generic</code><span class="ans">auto — no reviewer answer needed</span></p>
+        <h3>Bin it</h3><p>Duplicates are detected and discarded automatically.</p></div>
     </div>
-
-    <h3>Marked decorative, but still named</h3>
-    <!-- FAIL decorative-with-name -->
-    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%2234%22%20viewBox%3D%220%200%20420%2034%22%3E%20%3Cpath%20d%3D%22M10%2017%20Q%20105%20-6%20210%2017%20T%20410%2017%22%20stroke%3D%22%23b9c6da%22%20stroke-width%3D%222.5%22%20fill%3D%22none%22%2F%3E%20%3Ccircle%20cx%3D%22210%22%20cy%3D%2217%22%20r%3D%225%22%20fill%3D%22%23b9c6da%22%2F%3E%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2210%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%20%3C%2Fsvg%3E" width="420" height="34" role="presentation" alt="Blue divider flourish">
-
-    <h3>An alt that will not stop</h3>
-    <!-- FAIL alt-too-long (>150 chars, needs-review) -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260" alt="A bar chart titled Quarterly revenue by region showing six bars grouped into three regions namely AMER EMEA and APAC each with a Q2 bar and a Q3 bar where every single region improved between the two quarters and EMEA finished highest overall at just over one hundred and twenty million dollars in the third quarter">
-      <figcaption>The same figures, described at length.</figcaption></figure>
   </section>
 
-  <!-- ============================================================= -->
+  <!-- ===================================================== -->
+  <section aria-labelledby="s-integrations">
+    <span class="tag">Rules 3 and 13 — names that do not describe the image</span>
+    <h2 id="s-integrations">Integrations</h2>
+    <p>Ledgerly reconciles spend from the suppliers your team already uses.</p>
+    <div class="row" style="align-items:center">
+      <!-- FAIL alt-is-filename: the alt is literally the file name -->
+      <img class="thumb" src="images/pepsi.png" alt="pepsi.png">
+        <p class="rule"><code>alt-is-filename</code><span class="ans">auto — no reviewer answer needed</span></p>
+      <!-- FAIL alt-not-meaningful: a logo described as something else entirely -->
+      <img class="thumb" src="images/nike.png" alt="Quarterly spend by category, bar chart">
+        <p class="rule"><code>alt-not-meaningful</code><span class="ans">&ldquo;Does the name describe the image?&rdquo; &rarr; <b>No</b></span></p>
+      <!-- PASS: named for what it is -->
+      <img class="thumb" src="images/chanel.jpeg" alt="Chanel">
+        <p class="rule ok"><code>none — should pass</code><span class="ans">&ldquo;Does the name describe the image?&rdquo; &rarr; <b>Yes</b></span></p>
+    </div>
+  </section>
+
+  <!-- ===================================================== -->
+  <section aria-labelledby="s-theme">
+    <span class="tag">Rules 5 and 7 — decoration that carries a name</span>
+    <h2 id="s-theme">Workspace theme</h2>
+    <p>Pick an accent colour for your workspace. The swatches carry no information a caption does not.</p>
+    <div class="row" style="align-items:center">
+      <!-- FAIL decorative-with-name: role=presentation yet still named -->
+      <img class="swatch" src="images/green.png" role="presentation" alt="Green accent colour swatch">
+        <p class="rule"><code>decorative-with-name</code><span class="ans">auto — no reviewer answer needed</span></p>
+      <!-- FAIL decorative-image-has-alt: plain decoration given a real description -->
+      <img class="swatch" src="images/purple.jpeg" alt="A solid purple square used as a decorative accent">
+        <p class="rule"><code>decorative-image-has-alt</code><span class="ans">&ldquo;Select decorative images&rdquo; &rarr; <b>tick this one</b></span></p>
+      <!-- PASS: decorative and correctly hidden -->
+      <img class="swatch" src="images/chanel-2.png" alt="">
+        <p class="rule ok"><code>none — should pass</code><span class="ans">&ldquo;Select decorative images&rdquo; &rarr; <b>tick this one</b></span></p>
+    </div>
+    <div class="bg-yellow" style="margin-top:14px"></div>
+  </section>
+
+  <!-- ===================================================== -->
+  <section aria-labelledby="s-receipts">
+    <span class="tag">Rules 6 and 9 — text living inside an image</span>
+    <h2 id="s-receipts">Receipts</h2>
+
+    <h3>A receipt described at exhausting length</h3>
+    <!-- FAIL alt-too-long: >150 characters -->
+    <figure><img class="med" src="images/receipt-1.jpeg" alt="A scanned paper receipt from a restaurant showing the establishment name at the top followed by a dated list of ordered items each with its own line price then a subtotal a service charge a tax line and finally the total amount payable printed in bold at the very bottom of the slip along with the card terminal reference number">
+      <p class="rule"><code>alt-too-long</code><span class="ans">auto (needs-review) — no reviewer answer needed</span></p>
+      <figcaption>Uploaded 14 September, matched to card ending 4021.</figcaption></figure>
+
+    <h3>A scanned page that is entirely text</h3>
+    <p>Every word below is pixels — it cannot be resized, searched, translated or read aloud.</p>
+    <!-- FAIL image-of-text -->
+    <figure><img class="med" src="images/scanned-document.jpeg" alt="Scanned expense policy, chapter one">
+        <p class="rule"><code>image-of-text</code><span class="ans">&ldquo;Which contain text?&rdquo; &rarr; <b>tick this one</b></span></p>
+      <figcaption>Expense policy, page 1.</figcaption></figure>
+
+    <!-- FAIL image-of-text: a second instance, different document -->
+    <figure><img class="med" src="images/scanned-document-2.png" alt="Scanned terms of service, chapter one">
+        <p class="rule"><code>image-of-text</code><span class="ans">&ldquo;Which contain text?&rdquo; &rarr; <b>tick this one</b></span></p>
+      <figcaption>Terms of service, page 1.</figcaption></figure>
+
+    <h3>Correctly handled</h3>
+    <!-- PASS: functional image inside a link, named for its destination -->
+    <a href="#receipts"><img class="thumb" src="images/receipt-2.jpeg" alt="Open the September receipt archive">
+        <p class="rule ok"><code>none — should pass</code><span class="ans">functional image, named for its destination</span></p></a>
+  </section>
+
+  <!-- ===================================================== -->
+  <section aria-labelledby="s-local">
+    <span class="tag">Rule 9 again — marketing banners as pictures of words</span>
+    <h2 id="s-local">Available in your language</h2>
+    <p>These promotional banners are images, so the words in them reach nobody using assistive technology.</p>
+    <div class="row">
+      <!-- FAIL image-of-text x3, different languages -->
+      <img class="med" src="images/hindi-english.png" alt="Test — meaning in Hindi">
+        <p class="rule"><code>image-of-text</code><span class="ans">&ldquo;Which contain text?&rdquo; &rarr; <b>tick this one</b></span></p>
+      <img class="med" src="images/japanese.jpeg" alt="Japanese promotional banner">
+        <p class="rule"><code>image-of-text</code><span class="ans">&ldquo;Which contain text?&rdquo; &rarr; <b>tick this one</b></span></p>
+      <img class="med" src="images/chinese.png" alt="Chinese promotional banner">
+        <p class="rule"><code>image-of-text</code><span class="ans">&ldquo;Which contain text?&rdquo; &rarr; <b>tick this one</b></span></p>
+    </div>
+    <p>Ledgerly is localised into German, Korean and Spanish as well.</p>
+    <div class="row">
+      <img class="thumb" src="images/german.jpeg" alt="German promotional banner">
+      <img class="thumb" src="images/korean.png" alt="Korean promotional banner">
+      <img class="thumb" src="images/argentina.png" alt="Spanish promotional banner">
+    </div>
+  </section>
+
+  <!-- ===================================================== -->
   <section aria-labelledby="s-svg">
-    <span class="tag">Rule - image-role-missing</span>
-    <h2 id="s-svg">Inline graphics</h2>
-    <p>An inline <code>&lt;svg&gt;</code> with a name but no <code>role</code> is not announced as an image.</p>
+    <span class="tag">Rule 2 — graphics not exposed as images</span>
+    <h2 id="s-svg">Live spend</h2>
+    <p>An inline graphic with a name but no role is never announced as an image.</p>
     <div class="row" style="align-items:center">
       <!-- FAIL image-role-missing: named svg, no role="img" -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="190" height="56" viewBox="0 0 190 56" aria-label="Uptime over the last 30 days, steady at 99.98 percent">
-        <polyline points="4,44 28,40 52,42 76,30 100,34 124,20 148,24 172,12" fill="none" stroke="#0b5fd0" stroke-width="3"/>
-        <circle cx="172" cy="12" r="4" fill="#0b5fd0"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="58" viewBox="0 0 200 58" aria-label="Spend this month, tracking 8 percent below budget">
+        <polyline points="4,46 30,42 56,44 82,32 108,36 134,22 160,26 186,14" fill="none" stroke="#0b5fd0" stroke-width="3"/>
+        <circle cx="186" cy="14" r="4.5" fill="#0b5fd0"/>
       </svg>
-      <!-- PASS: same graphic, correctly exposed -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="190" height="56" viewBox="0 0 190 56" role="img" aria-label="Error rate over the last 30 days, falling to 0.02 percent">
-        <polyline points="4,14 28,18 52,16 76,26 100,24 124,36 148,34 172,46" fill="none" stroke="#c0392b" stroke-width="3"/>
-        <circle cx="172" cy="46" r="4" fill="#c0392b"/>
+      <p class="rule"><code>image-role-missing</code><span class="ans">auto — named svg with no role="img"</span></p>
+      <!-- PASS: the same shape, correctly exposed -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="58" viewBox="0 0 200 58" role="img" aria-label="Unmatched receipts, down to three this week">
+        <polyline points="4,14 30,18 56,16 82,26 108,24 134,36 160,34 186,46" fill="none" stroke="#c0392b" stroke-width="3"/>
+        <circle cx="186" cy="46" r="4.5" fill="#c0392b"/>
       </svg>
     </div>
-    <p>Uptime and error rate, last 30 days.</p>
+
+    <h3>A named background that is not exposed as an image</h3>
+    <!-- FAIL image-role-missing (background): has a name, no role="img" -->
+    <div class="bg-arabic" aria-label="Arabic language promotional banner"></div>
+    <p class="rule"><code>image-role-missing</code><span class="ans">auto — named background with no role="img"</span></p>
   </section>
 
-  <!-- ============================================================= -->
-  <section aria-labelledby="s-bg">
-    <span class="tag">Rules - CSS backgrounds</span>
-    <h2 id="s-bg">Backgrounds</h2>
-    <p>Background images are invisible to assistive technology until someone says they carry meaning.</p>
+  <!-- ===================================================== -->
+  <section aria-labelledby="s-spend">
+    <span class="tag">Rules 8, 10, 11, 12 — charts</span>
+    <h2 id="s-spend">Spend analytics</h2>
 
-    <h3>Informative background with no name</h3>
-    <!-- FAIL image-no-text-alternative (background) once the reviewer includes it as informative -->
-    <div class="bg-chart"></div>
-    <p>Third-quarter performance, by region.</p>
+    <h3>The chart the paragraph depends on, hidden</h3>
+    <p>Category C overtook every other cost centre this quarter — which you can only learn from the picture.</p>
+    <!-- FAIL informative-image-hidden: meaningful chart marked decorative -->
+    <figure><img class="wide" src="images/bar-chart.png" alt="">
+        <p class="rule"><code>informative-image-hidden</code><span class="ans">&ldquo;Select decorative images&rdquo; &rarr; <b>leave unticked</b></span></p></figure>
 
-    <h3>Named background, not exposed as an image</h3>
-    <!-- FAIL image-role-missing (named background, no role="img") -->
-    <div class="bg-hero" aria-label="The Reykjavik office at sunrise"></div>
+    <h3>An informative background with no name at all</h3>
+    <!-- FAIL image-no-text-alternative (background): informative, unnamed -->
+    <div class="bg-pie"></div>
+    <p class="rule"><code>image-no-text-alternative</code><span class="ans">background — &ldquo;Which images to test?&rdquo; &rarr; <b>include it</b>, leave undecorative</span></p>
+    <p>Spend split by department this month.</p>
 
-    <h3>Purely decorative background</h3>
-    <!-- PASS: decorative background, no name, nothing claimed -->
-    <div class="bg-ornament"></div>
-  </section>
+    <h3>A chart with nothing but a label</h3>
+    <!-- FAIL complex-image-no-long-description -->
+    <figure><img class="wide" src="images/line-chart.png" alt="Spend trend">
+        <p class="rule"><code>complex-image-no-long-description</code><span class="ans">&ldquo;Which are complex?&rdquo; &rarr; <b>tick this one</b></span></p></figure>
 
-  <!-- ============================================================= -->
-  <section aria-labelledby="s-review">
-    <span class="tag">Rules - reviewer answers, AI pre-fills</span>
-    <h2 id="s-review">Insights</h2>
-
-    <h3>An informative image hidden from assistive technology</h3>
-    <p>This chart carries the entire point of the paragraph, yet it is marked as decoration.</p>
-    <!-- FAIL informative-image-hidden: alt="" on a meaningful chart -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260" alt="">
-      <figcaption>EMEA overtook AMER in Q3 for the first time.</figcaption></figure>
-
-    <h3>Decoration that has been given a description</h3>
-    <p>Nothing below the sentence adds information, but it is described anyway.</p>
-    <!-- FAIL decorative-image-has-alt: ornament, real alt, not hidden -->
-    <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%2234%22%20viewBox%3D%220%200%20420%2034%22%3E%20%3Cpath%20d%3D%22M10%2017%20Q%20105%20-6%20210%2017%20T%20410%2017%22%20stroke%3D%22%23b9c6da%22%20stroke-width%3D%222.5%22%20fill%3D%22none%22%2F%3E%20%3Ccircle%20cx%3D%22210%22%20cy%3D%2217%22%20r%3D%225%22%20fill%3D%22%23b9c6da%22%2F%3E%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2210%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%20%3C%2Fsvg%3E" width="420" height="34" alt="A decorative blue swirl separating two sections">
-
-    <h3>Text baked into an image</h3>
-    <p>The offer below exists only as pixels, so it cannot be resized, translated or read aloud.</p>
-    <!-- FAIL image-of-text -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22520%22%20height%3D%22130%22%20viewBox%3D%220%200%20520%20130%22%3E%20%3Crect%20width%3D%22520%22%20height%3D%22130%22%20fill%3D%22%230b3f8f%22%2F%3E%20%3Ctext%20x%3D%22260%22%20y%3D%2252%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20fill%3D%22%23ffffff%22%3ESUMMER%20SALE%3C%2Ftext%3E%20%3Ctext%20x%3D%22260%22%20y%3D%2288%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2226%22%20fill%3D%22%23ffd166%22%3E50%25%20OFF%20ALL%20PLANS%3C%2Ftext%3E%20%3Ctext%20x%3D%22260%22%20y%3D%22112%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2213%22%20fill%3D%22%23cfe0fb%22%3EOffer%20ends%2030%20September%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="520" height="130" alt="Summer sale, 50% off all plans, offer ends 30 September"></figure>
-
-    <h3>An alt that describes a different picture</h3>
-    <!-- FAIL alt-not-meaningful: mountains described as a team photo -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22380%22%20height%3D%22240%22%20viewBox%3D%220%200%20380%20240%22%3E%20%3Crect%20width%3D%22380%22%20height%3D%22240%22%20fill%3D%22%23bfe0f5%22%2F%3E%20%3Ccircle%20cx%3D%22300%22%20cy%3D%2258%22%20r%3D%2226%22%20fill%3D%22%23ffd870%22%2F%3E%20%3Cpath%20d%3D%22M0%20240%20L96%20108%20L168%20240%20Z%22%20fill%3D%22%236d8b6e%22%2F%3E%20%3Cpath%20d%3D%22M120%20240%20L226%2076%20L330%20240%20Z%22%20fill%3D%22%234f6b52%22%2F%3E%20%3Cpath%20d%3D%22M226%2076%20L260%20130%20L192%20130%20Z%22%20fill%3D%22%23f2f6f8%22%2F%3E%20%3Crect%20y%3D%22200%22%20width%3D%22380%22%20height%3D%2240%22%20fill%3D%22%233f5a43%22%2F%3E%20%3C%2Fsvg%3E" width="380" height="240" alt="The engineering team at the 2024 company picnic">
-      <figcaption>Where we go to think.</figcaption></figure>
-
-    <h3>A complex chart with nothing but a label</h3>
-    <!-- FAIL complex-image-no-long-description: chart, short alt, no long description anywhere -->
-    <figure><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260" alt="Revenue chart"></figure>
-
-    <h3>A complex chart whose long description says nothing</h3>
-    <!-- FAIL long-description-not-adequate: a long description that omits the data -->
+    <h3>A chart whose long description says nothing</h3>
+    <!-- FAIL long-description-not-adequate -->
     <figure>
-      <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260" alt="Quarterly revenue by region"
-           aria-describedby="ld-inadequate">
-      <figcaption id="ld-inadequate">This chart shows some data about our regions over two quarters.</figcaption>
+      <img class="wide" src="images/point-chart.jpeg" alt="Spend against budget by week" aria-describedby="ld-bad">
+      <figcaption id="ld-bad">This chart shows some figures for the period.</figcaption>
+      <p class="rule"><code>long-description-not-adequate</code><span class="ans">&ldquo;Which are complex?&rdquo; &rarr; <b>tick</b> &middot; &ldquo;Does the long description cover the essentials?&rdquo; &rarr; <b>No</b></span></p>
     </figure>
 
-    <h3>The same chart, described properly</h3>
+    <h3>The same kind of chart, described properly</h3>
     <!-- PASS: complex image with an adequate long description -->
     <figure>
-      <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22460%22%20height%3D%22260%22%20viewBox%3D%220%200%20460%20260%22%3E%20%3Crect%20width%3D%22460%22%20height%3D%22260%22%20fill%3D%22%23ffffff%22%2F%3E%20%3Ctext%20x%3D%2220%22%20y%3D%2226%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22700%22%20fill%3D%22%2316233a%22%3EQuarterly%20revenue%20by%20region%20%28US%24m%29%3C%2Ftext%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%22216%22%20x2%3D%22440%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20x1%3D%2256%22%20y1%3D%2248%22%20x2%3D%2256%22%20y2%3D%22216%22%20stroke%3D%22%238894a8%22%20stroke-width%3D%221.5%22%2F%3E%20%3Ctext%20x%3D%2230%22%20y%3D%22220%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E0%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22160%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E40%3C%2Ftext%3E%20%3Ctext%20x%3D%2224%22%20y%3D%22104%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E80%3C%2Ftext%3E%20%3Ctext%20x%3D%2218%22%20y%3D%2256%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%235b6b86%22%3E120%3C%2Ftext%3E%20%3Crect%20x%3D%2278%22%20%20y%3D%22150%22%20width%3D%2238%22%20height%3D%2266%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2238%22%20height%3D%2296%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22176%22%20y%3D%22128%22%20width%3D%2238%22%20height%3D%2288%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22218%22%20y%3D%2286%22%20%20width%3D%2238%22%20height%3D%22130%22%20fill%3D%22%237fb0f2%22%2F%3E%20%3Crect%20x%3D%22274%22%20y%3D%22170%22%20width%3D%2238%22%20height%3D%2246%22%20%20fill%3D%22%232f6fd0%22%2F%3E%3Crect%20x%3D%22316%22%20y%3D%22140%22%20width%3D%2238%22%20height%3D%2276%22%20%20fill%3D%22%237fb0f2%22%2F%3E%20%3Ctext%20x%3D%2292%22%20%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAMER%3C%2Ftext%3E%20%3Ctext%20x%3D%22192%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EEMEA%3C%2Ftext%3E%20%3Ctext%20x%3D%22292%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20fill%3D%22%2316233a%22%3EAPAC%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2260%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%232f6fd0%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2270%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ2%3C%2Ftext%3E%20%3Crect%20x%3D%22372%22%20y%3D%2278%22%20width%3D%2211%22%20height%3D%2211%22%20fill%3D%22%237fb0f2%22%2F%3E%3Ctext%20x%3D%22389%22%20y%3D%2288%22%20font-family%3D%22sans-serif%22%20font-size%3D%2210%22%20fill%3D%22%2316233a%22%3EQ3%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="460" height="260" alt="Quarterly revenue by region, Q2 versus Q3"
-           aria-describedby="ld-good">
-      <figcaption id="ld-good">Revenue rose in all three regions between Q2 and Q3. EMEA grew fastest,
-        from about 66 to 120 million dollars, overtaking AMER which moved from 50 to 72 million.
-        APAC remained smallest, rising from 34 to 57 million.</figcaption>
+      <img class="wide" src="images/hindi.jpeg" alt="Reconciliation rate by month" aria-describedby="ld-good">
+      <figcaption id="ld-good">Reconciliation rose steadily from 71 percent in April to 94 percent in
+        September, with the sharpest gain in July when automatic matching was switched on.</figcaption>
+      <p class="rule ok"><code>none — should pass</code><span class="ans">&ldquo;Which are complex?&rdquo; &rarr; <b>tick</b> &middot; &ldquo;…cover the essentials?&rdquo; &rarr; <b>Yes</b></span></p>
     </figure>
-  </section>
-
-  <!-- ============================================================= -->
-  <section aria-labelledby="s-ok">
-    <span class="tag">Controls - these must not be reported</span>
-    <h2 id="s-ok">Correctly handled images</h2>
-    <div class="row">
-      <!-- PASS: genuinely decorative, correctly hidden -->
-      <div class="card"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%2234%22%20viewBox%3D%220%200%20420%2034%22%3E%20%3Cpath%20d%3D%22M10%2017%20Q%20105%20-6%20210%2017%20T%20410%2017%22%20stroke%3D%22%23b9c6da%22%20stroke-width%3D%222.5%22%20fill%3D%22none%22%2F%3E%20%3Ccircle%20cx%3D%22210%22%20cy%3D%2217%22%20r%3D%225%22%20fill%3D%22%23b9c6da%22%2F%3E%20%3Ccircle%20cx%3D%22120%22%20cy%3D%2210%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2224%22%20r%3D%222.5%22%20fill%3D%22%23d3dced%22%2F%3E%20%3C%2Fsvg%3E" width="200" height="20" alt="">
-        <p>Decorative, and marked as such.</p></div>
-      <!-- PASS: functional image inside a link, named for its destination -->
-      <div class="card"><a href="#docs"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23eaf1fd%22%2F%3E%20%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2230%22%3E%26%239889%3B%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="64" height="64" alt="Read the performance guide"></a>
-        <p>A functional image named for what it does.</p></div>
-      <!-- PASS: input type=image with alt -->
-      <div class="card"><form action="#insights"><input type="image" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23eafdf1%22%2F%3E%20%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2230%22%3E%26%23128101%3B%3C%2Ftext%3E%20%3C%2Fsvg%3E" width="64" height="64" alt="Share this dashboard"></form>
-        <p>An image button with a name.</p></div>
-    </div>
   </section>
 </main>
 
-<footer><p>Nimbus Analytics - fixture page for the Images IGT. Not a real product.</p></footer>
+<footer><p>Ledgerly — fixture page for the Images IGT. Not a real product.</p></footer>
 </body>
 </html>
